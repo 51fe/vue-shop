@@ -1,9 +1,15 @@
 <template>
-  <div v-bind:class="'toast toast-' + option.type" @click="clicked()" v-on:mouseover="onMouseOver"
-    v-on:mouseout="onMouseOut">
-    <div class="toast-title" v-html="option.title">
+  <div
+    :class="'toast toast-' + option.type"
+    @click="clicked()"
+    @mouseover="onMouseOver"
+    @mouseout="onMouseOut"
+  >
+    <div class="toast-title">
+      {{ option.title }}
     </div>
-    <div class="toast-message" v-html="option.msg">
+    <div class="toast-message">
+      {{ option.msg }}
     </div>
   </div>
 </template>
@@ -11,7 +17,12 @@
 
 export default {
   name: 'VueToast',
-  props: ['option'],
+  props: {
+    option: {
+      type: Object,
+      default: () => {}
+    }
+  },
   created() {
     if (this.option.timeout !== undefined && this.option.timeout !== 0) {
       this.setTimeout()

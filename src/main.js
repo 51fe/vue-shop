@@ -1,5 +1,3 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 
@@ -9,7 +7,7 @@ import VeeValidate from 'vee-validate'
 import VueToast from './plugins/vue-toast'
 import VueDialog from './plugins/vue-dialog'
 import './assets/css/iconfont.css'
-import './assets/less/app.less'
+import './styles/app.less'
 import { currency } from './utils/currency'
 
 Vue.config.productionTip = false
@@ -20,10 +18,11 @@ Vue.use(VueDialog)
 Vue.filter('currency', currency)
 
 /* eslint-disable no-new */
+
 new Vue({
-  el: '#app',
   router,
   store,
+  components: { App },
   template: '<App/>',
-  components: { App }
-})
+  render: h => h(App)
+}).$mount('#app')

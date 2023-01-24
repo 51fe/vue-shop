@@ -1,29 +1,73 @@
 <template>
   <div>
     <transition :name="options.transition">
-      <div :id="options.id" class="dialog-wrapper" v-if="visible" @click.self="maskClick" @keydown.esc="escape">
-        <div class="dialog-backdrop" :style="{background: options.maskColor}"></div>
-        <div class="dialog-content" :class="{'dialog-wide': options.wide}" ref="dialogContent" tabindex="-1">
-
-          <div class="dialog-header" :class="{'with-body': options.message}">
+      <div
+        v-if="visible"
+        :id="options.id"
+        class="dialog-wrapper"
+        @click.self="maskClick"
+        @keydown.esc="escape"
+      >
+        <div
+          class="dialog-backdrop"
+          :style="{background: options.maskColor}"
+        />
+        <div
+          ref="dialogContent"
+          class="dialog-content"
+          :class="{'dialog-wide': options.wide}"
+          tabindex="-1"
+        >
+          <div
+            class="dialog-header"
+            :class="{'with-body': options.message}"
+          >
             <p>{{ options.title }}</p>
           </div>
 
-          <div class="dialog-body" v-if="options.message">
+          <div
+            v-if="options.message"
+            class="dialog-body"
+          >
             <p>{{ options.message }}</p>
           </div>
 
-          <div class="dialog-body" v-if="options.mode === 'prompt'">
+          <div
+            v-if="options.mode === 'prompt'"
+            class="dialog-body"
+          >
             <div class="prompt-input-wrapper">
-              <input class="prompt-input" type="text" v-model="input" @keydown.enter="rbClick" ref="promptInput">
+              <input
+                ref="promptInput"
+                v-model="input"
+                class="prompt-input"
+                type="text"
+                @keydown.enter="rbClick"
+              >
             </div>
           </div>
 
           <div class="dialog-footer">
-            <input type="button" class="dialog-footer-button dialog-footer-button-alt" :class="{'red': options.lbDanger}" v-if="!options.lbHide" @click="lbClick" :value="options.lbLabel" ref="lbButton">
-            <input type="button" class="dialog-footer-button dialog-footer-button-main" :class="{'red': options.rbDanger}" v-if="!options.rbHide" @click="rbClick" :value="options.rbLabel" ref="rbButton" tabindex="-1">
+            <input
+              v-if="!options.lbHide"
+              ref="lbButton"
+              type="button"
+              class="dialog-footer-button dialog-footer-button-alt"
+              :class="{'red': options.lbDanger}"
+              :value="options.lbLabel"
+              @click="lbClick"
+            >
+            <input
+              v-if="!options.rbHide"
+              ref="rbButton"
+              type="button"
+              class="dialog-footer-button dialog-footer-button-main"
+              :class="{'red': options.rbDanger}"
+              :value="options.rbLabel"
+              tabindex="-1"
+              @click="rbClick"
+            >
           </div>
-
         </div>
       </div>
     </transition>
@@ -68,13 +112,8 @@ class Later {
 
 export default {
   OPTIONS_TEMPLATE,
-  props: [],
   components: {},
-  computed: {
-    options () {
-      return Object.assign({}, OPTIONS_TEMPLATE, this.optionsData)
-    }
-  },
+  props: [],
   data () {
     return {
       queue: [],
@@ -85,6 +124,12 @@ export default {
       promiseHandler: null
     }
   },
+  computed: {
+    options () {
+      return Object.assign({}, OPTIONS_TEMPLATE, this.optionsData)
+    }
+  },
+  mounted () {},
   methods: {
     enqueue (args) {
       let pending = this.queue.length
@@ -171,8 +216,7 @@ export default {
         this.options.action()
       }
     }
-  },
-  mounted () {}
+  }
 }
 </script>
 

@@ -1,8 +1,10 @@
 <template>
-  <div v-bind:class="'toast-container ' + defaultPosition">
-    <vue-toast :option="optionsArray" v-for="(optionsArray, index) in list"
-      :key="index" v-if="optionsArray.position === defaultPosition">
-    </vue-toast>
+  <div :class="'toast-container ' + defaultPosition">
+    <vue-toast
+      v-for="(optionsArray, index) in defaultPositionList"
+      :key="index"
+      :option="optionsArray"
+    />
   </div>
 </template>
 <script>
@@ -24,6 +26,11 @@ export default {
     return {
       positions: ['toast-top-right', 'toast-bottom-right', 'toast-bottom-left', 'toast-top-left', 'toast-top-full-width', 'toast-bottom-full-width', 'toast-top-center', 'toast-bottom-center'],
       list: []
+    }
+  },
+  computed: {
+    defaultPositionList() {
+      return this.list.filter(item => item.position === this.defaultPosition)
     }
   },
   methods: {

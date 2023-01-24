@@ -23,7 +23,7 @@ export const productMutations = {
   [types.ADD_PRODUCT_SUCCESS](state, payload) {
     state.products.push(payload)
   },
-  [types.UPDATE_PRODUCT_SUCCESS](state, payload) {
+  [types.UPDATE_PRODUCT_SUCCESS]() {
   },
   [types.REMOVE_PRODUCT_SUCCESS](state, id) {
     const index = state.products.findIndex(p => p._id === id)
@@ -35,13 +35,10 @@ export const manufacturerMutations = {
   [types.GET_ALL_MANUFACTURERS_SUCCESS](state, payload=[]) {
     state.manufacturers = payload
   },
-  [types.GET_MANUFACTURER_BY_ID_SUCCESS](state, payload={}) {
-    state.manufacturer = payload
-  },
   [types.ADD_MANUFACTURER_SUCCESS](state, payload) {
     state.manufacturers.push(payload)
   },
-  [types.UPDATE_MANUFACTURER_SUCCESS](state, payload) {
+  [types.UPDATE_MANUFACTURER_SUCCESS]() {
   },
   [types.REMOVE_MANUFACTURER_SUCCESS](state, id) {
     const index = state.manufacturers.findIndex(p => p._id === id)
@@ -56,20 +53,17 @@ export const manufacturerMutations = {
  * @param many
  */
 function addToCart(state, item, many = false) {
-  const record = state.cart.find(p => {
+  const product = state.cart.find(p => {
     return p._id === item._id
   })
-  if (!record) {
-    state.cart.push({
+  const count = many ? state.count : 1
+  if (!product) {
+    state.cart.unshift({
       ...item,
-      quantity: item.quantity
+      quantity: count
     })
   } else {
-    if (many) {
-      record.quantity += state.quantity
-    } else {
-      record.quantity += item.quantity
-    }
+    product.quantity += count
   }
   localStorage.setItem('CART', JSON.stringify(state.cart));
 }
@@ -80,7 +74,7 @@ export const cartMutations = {
    * @param state
    * @param item
    */
-  addItemsToCart(state, item) {
+  addCartItems(state, item) {
     addToCart(state, item, true)
   },
   /**
@@ -88,11 +82,11 @@ export const cartMutations = {
    * @param state
    * @param item
    */
-  addItemToCart(state, item) {
+  addCartItem(state, item) {
     addToCart(state, item)
   },
   // Called when removing one item from cart
-  removeFromCart(state, item) {
+  removeCartItem(state, item) {
     const index = state.cart.findIndex(p => p._id === item._id)
     state.cart.splice(index, 1);
     localStorage.setItem('CART', JSON.stringify(state.cart));
@@ -102,20 +96,20 @@ export const cartMutations = {
    * @param state
    * @param item
    */
-  updateCart(state, item) {
-    let record = state.cart.find(p => p._id === item._id)
-    if (record) {
-      record.quantity = item.quantity
+  updateCartItem(state, item) {
+    let product = state.cart.find(p => p._id === item.id)
+    if (product) {
+      product.quantity = item.count
     }
     localStorage.setItem('CART', JSON.stringify(state.cart));
   },
   /**
    * Changing count to prepare to update cart
    * @param state
-   * @param quantity
+   * @param count
    */
-  preUpdateCart(state, quantity) {
-    state.quantity = quantity
+  willUpdateCartItem(state, count) {
+    state.count = count
   }
 }
 

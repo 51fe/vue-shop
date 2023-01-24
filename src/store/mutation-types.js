@@ -1,7 +1,5 @@
 export const GET_ALL_MANUFACTURERS_SUCCESS = 'GET_ALL_MANUFACTURERS_SUCCESS'
 
-export const GET_MANUFACTURER_BY_ID_SUCCESS = 'GET_MANUFACTURER_BY_ID_SUCCESS'
-
 export const ADD_MANUFACTURER_SUCCESS = 'ADD_MANUFACTURER_SUCCESS'
 
 export const UPDATE_MANUFACTURER_SUCCESS = 'UPDATE_MANUFACTURER_SUCCESS'
@@ -18,15 +16,7 @@ export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS'
 
 export const REMOVE_PRODUCT_SUCCESS = 'REMOVE_PRODUCT_SUCCESS'
 
-export const ADD_ITEMS_TO_CART = 'addItemsToCart'
-
-export const ADD_ITEM_TO_CART = 'addItemToCart'
-
-export const REMOVE_FROM_CART = 'removeFromCart'
-
-export const UPDATE_CART = 'updateCart'
-
-export const PRE_UPDATE_CART = 'preUpdateCart'
+export const ADD_CART_ITEMS = 'addCartItems'
 
 export const PRELOAD = 'PRELOAD'
 

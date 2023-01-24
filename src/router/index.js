@@ -1,16 +1,14 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from 'vue'
+import Router from 'vue-router'
 
-import Home from '../pages/Home';
-import Cart from '../pages/Cart';
-import Details from '../pages/Detail';
-import Index from '../pages/admin/Index';
-import NewProduct from '../pages/admin/product/New';
-import Products from '../pages/admin/product/Products';
-import EditProduct from '../pages/admin/product/Edit';
-import NewManufacturer from '../pages/admin/manufacturer/New';
-import Manufacturers from '../pages/admin/manufacturer/Manufacturers';
-import EditManufacturer from '../pages/admin/manufacturer/Edit'
+import Home from '../views/Home'
+import Cart from '../views/Cart'
+import Detail from '../views/Detail'
+import Admin from '../views/admin'
+import ProductList from '../views/admin/ProductList'
+import ProductForm from '../views/admin/ProductForm'
+import ManufacturerList from '../views/admin/ManufacturerList'
+import ManufacturerForm from '../views/admin/ManufacturerForm'
 
 Vue.use(Router);
 
@@ -19,60 +17,61 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      redirect: Products
-    },
-    {
-      path: '/products',
-      name: 'Products',
-      component: Home,
+      component: Home
     },
     {
       path: '/admin',
       name: 'Admin',
-      component: Index,
-      redirect: Manufacturers,
+      component: Admin,
+      redirect: '/admin/manufacturers',
       children: [
         {
           path: 'products',
           name: 'AdminProducts',
-          component: Products
+          component: ProductList
         },
         {
           path: 'products/new',
           name: 'NewProduct',
-          component: NewProduct,
+          component: ProductForm
         },
         {
-          path: 'products/edit/:id',
+          path: 'products/edit',
           name: 'EditProduct',
-          component: EditProduct,
+          component: ProductForm,
+          props: true
         },
         {
           path: 'manufacturers',
           name: 'Manufacturers',
-          component: Manufacturers,
+          component: ManufacturerList
         },
         {
           path: 'manufacturers/new',
           name: 'NewManufacturer',
-          component: NewManufacturer,
+          component: ManufacturerForm,
         },
         {
-          path: 'manufacturers/edit/:id',
+          path: 'manufacturers/edit',
           name: 'EditManufacturer',
-          component: EditManufacturer,
+          component: ManufacturerForm,
+          props: true
         }
       ]
     },
     {
       path: '/products/:id',
-      name: 'Details',
-      component: Details
+      name: 'Detail',
+      component: Detail
     },
     {
       path: '/cart',
       name: 'Cart',
-      component: Cart,
+      component: Cart
+    },
+    {
+      path: '*',
+      redirect: '/',
     }
   ]
 });
