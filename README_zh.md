@@ -2,13 +2,9 @@
 
 > 使用MongoDB + Express + Vue.js + Node.js + Vuex + Vue Router开发的购物模块。如果您喜欢本项目, 欢迎点赞，谢谢！
 
-- 截图
+##  截图
 
-![vue-shop.jpg](https://www.riafan.com/uploads/1902/react-shop.jpg)
-
-- 教程
-
-[Vue shopping cart](https://www.riafan.com/vue-shop.html)
+![vue-shop.jpg](https://51fe.site/uploads/1902/react-shop.jpg)
 
 
 ## 运行服务
